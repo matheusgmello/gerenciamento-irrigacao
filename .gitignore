@@ -1,0 +1,9 @@
+vendor/
+composer.lock
+dados/*.json
+.env
+.idea/
+.vscode/
+*.log
+HELP.md
+backup/
