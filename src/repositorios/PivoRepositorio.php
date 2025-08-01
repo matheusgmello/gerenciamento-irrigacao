@@ -1,65 +1,75 @@
 <?php
 namespace App\Repositorios;
 
+use App\Utils\ConexaoSQLite;
+
 class PivoRepositorio
 {
-    private $caminho = __DIR__ . '/../../dados/pivos.json';
-
-    private function ler_todos(): array
-    {
-        $conteudo = file_get_contents($this->caminho);
-        $dados = json_decode($conteudo, true);
-        return is_array($dados) ? $dados : [];
-    }
-
-    private function salvar_todos(array $pivos): void
-    {
-        file_put_contents($this->caminho, json_encode($pivos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-    }
-
     public function salvar(array $pivo): void
     {
-        $todos = $this->ler_todos();
-        $todos[] = $pivo;
-        $this->salvar_todos($todos);
+        $pdo = ConexaoSQLite::obter();
+        $stmt = $pdo->prepare("
+            INSERT INTO pivos (id, description, flowRate, minApplicationDepth, userId)
+            VALUES (?, ?, ?, ?, ?)
+        ");
+        $stmt->execute([
+            $pivo['id'],
+            $pivo['description'],
+            $pivo['flowRate'],
+            $pivo['minApplicationDepth'],
+            $pivo['userId']
+        ]);
     }
 
     public function listar_por_usuario(string $userId): array
     {
-        $todos = $this->ler_todos();
-        return array_values(array_filter($todos, fn($p) => $p['userId'] === $userId));
+        $pdo = ConexaoSQLite::obter();
+        $stmt = $pdo->prepare("SELECT * FROM pivos WHERE userId = ?");
+        $stmt->execute([$userId]);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function buscar_por_id(string $id): ?array
     {
-        $todos = $this->ler_todos();
-        foreach ($todos as $p) {
-            if ($p['id'] === $id) return $p;
-        }
-        return null;
+        $pdo = ConexaoSQLite::obter();
+        $stmt = $pdo->prepare("SELECT * FROM pivos WHERE id = ?");
+        $stmt->execute([$id]);
+        $p = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $p ?: null;
     }
 
     public function atualizar(string $id, array $dados): ?array
     {
-        $todos = $this->ler_todos();
-        foreach ($todos as &$p) {
-            if ($p['id'] === $id) {
-                $p = array_merge($p, $dados);
-                $this->salvar_todos($todos);
-                return $p;
-            }
+        $pdo = ConexaoSQLite::obter();
+        $campos = [];
+        $params = [];
+        if (isset($dados['description'])) {
+            $campos[] = "description = ?";
+            $params[] = $dados['description'];
         }
-        return null;
+        if (isset($dados['flowRate'])) {
+            $campos[] = "flowRate = ?";
+            $params[] = $dados['flowRate'];
+        }
+        if (isset($dados['minApplicationDepth'])) {
+            $campos[] = "minApplicationDepth = ?";
+            $params[] = $dados['minApplicationDepth'];
+        }
+        if (empty($campos)) {
+            return $this->buscar_por_id($id);
+        }
+        $params[] = $id;
+        $sql = "UPDATE pivos SET " . implode(", ", $campos) . " WHERE id = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        return $this->buscar_por_id($id);
     }
 
     public function remover(string $id): bool
     {
-        $todos = $this->ler_todos();
-        $antes = count($todos);
-        $todos = array_filter($todos, fn($p) => $p['id'] !== $id);
-        $depois = count($todos);
-        if ($antes === $depois) return false;
-        $this->salvar_todos(array_values($todos));
-        return true;
+        $pdo = ConexaoSQLite::obter();
+        $stmt = $pdo->prepare("DELETE FROM pivos WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->rowCount() > 0;
     }
 }
