@@ -6,7 +6,10 @@ services:
     volumes:
       - ./:/app:delegated
       - dados:/app/dados
-    command: php -S 0.0.0.0:8000 index.php
+    command: sh -c "php scripts/migrar_sqlite.php && php -S 0.0.0.0:8000 index.php"
+    environment:
+      PHP_ERROR_REPORTING: "E_ALL"
+      PHP_DISPLAY_ERRORS: "1"
 
 volumes:
   dados:
