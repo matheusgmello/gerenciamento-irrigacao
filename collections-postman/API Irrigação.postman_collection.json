@@ -1,0 +1,239 @@
+{
+	"info": {
+		"_postman_id": "c668e650-3234-4747-9647-9052451fc8ad",
+		"name": "API Irrigação",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "24213547"
+	},
+	"item": [
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Busca usuarios",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/debug/usuarios"
+					},
+					"response": []
+				},
+				{
+					"name": "Cria um usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"carlos\",\r\n  \"password\": \"senha123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/auth/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Login do usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"carlos\",\r\n  \"password\": \"senha123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/auth/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pivos",
+			"item": [
+				{
+					"name": "Busca Pivo by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcGktaXJyaWdhY2FvIiwic3ViIjoiMzBmMTY5NmUtMzhkNi00ZDc1LTg0OWItMTg5OTY4NTEzMDA2IiwidXNlcm5hbWUiOiJqb2FvIiwiaWF0IjoxNzU0MDg5ODg1LCJleHAiOjE3NTQwOTM0ODV9.qGiPfnCds26d83IBmDJ35qPb7t-nfrVzxowbBEH9OQg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8000/pivots/72ede0a5-c174-4fd2-b53b-196e317b15e8"
+					},
+					"response": []
+				},
+				{
+					"name": "Busca Pivos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcGktaXJyaWdhY2FvIiwic3ViIjoiMzBmMTY5NmUtMzhkNi00ZDc1LTg0OWItMTg5OTY4NTEzMDA2IiwidXNlcm5hbWUiOiJqb2FvIiwiaWF0IjoxNzU0MDg5ODg1LCJleHAiOjE3NTQwOTM0ODV9.qGiPfnCds26d83IBmDJ35qPb7t-nfrVzxowbBEH9OQg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8000/pivots"
+					},
+					"response": []
+				},
+				{
+					"name": "Cria Pivo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcGktaXJyaWdhY2FvIiwic3ViIjoiZjI3MzkyZDgtMDFjMy00ZmNkLWExYWItOWE1OThlNWIxNjJjIiwidXNlcm5hbWUiOiJjYXJsb3MiLCJpYXQiOjE3NTQwOTAzMzcsImV4cCI6MTc1NDA5MzkzN30.ws7m4LRp8iaIoUDWnghn18YbwTPrTPwmP10Fpsk87Os"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"description\": \"Pivô Fazenda B\",\r\n  \"flowRate\": 150.5,\r\n  \"minApplicationDepth\": 5.0\r\n}"
+						},
+						"url": "http://localhost:8000/pivots"
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta pivo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcGktaXJyaWdhY2FvIiwic3ViIjoiMTI5ZDg1YjgtYzI1NC00NGRiLWJkNTAtMjZmNzI4ZjlkM2RjIiwidXNlcm5hbWUiOiJqb2FvIiwiaWF0IjoxNzUzOTk0ODY3LCJleHAiOjE3NTM5OTg0Njd9.BIdm_DVIpXd99Gh7F5tLShaBrMHJgy6HqNHVZu6p3K4"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8000/pivots/0747c9fd-7d80-4f42-a524-ebe973759856"
+					},
+					"response": []
+				},
+				{
+					"name": "Atualiza um pivo by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcGktaXJyaWdhY2FvIiwic3ViIjoiYTU5MmVkMWYtYjA0Ni00YzU2LWJkNDEtZTViMThkYWU4YzYzIiwidXNlcm5hbWUiOiJqb2FvIiwiaWF0IjoxNzU0MDc5MzIwLCJleHAiOjE3NTQwODI5MjB9.OqTasimv4_BH3bsOBVOYg3ZbKQ9uD0-H70BdZPzfkjQ"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"flowRate\": 200.0\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/pivots/273f877f-19e3-4a52-af9c-dd1626a3a27f"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Irrigation",
+			"item": [
+				{
+					"name": "Cria irrigation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcGktaXJyaWdhY2FvIiwic3ViIjoiMzBmMTY5NmUtMzhkNi00ZDc1LTg0OWItMTg5OTY4NTEzMDA2IiwidXNlcm5hbWUiOiJqb2FvIiwiaWF0IjoxNzU0MDg5ODg1LCJleHAiOjE3NTQwOTM0ODV9.qGiPfnCds26d83IBmDJ35qPb7t-nfrVzxowbBEH9OQg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"pivotId\": \"72ede0a5-c174-4fd2-b53b-196e317b15e8\",\r\n  \"applicationAmount\": 30.0,\r\n  \"irrigationDate\": \"2025-08-01T10:00:00Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/irrigations"
+					},
+					"response": []
+				},
+				{
+					"name": "Busca Irrigation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcGktaXJyaWdhY2FvIiwic3ViIjoiMzBmMTY5NmUtMzhkNi00ZDc1LTg0OWItMTg5OTY4NTEzMDA2IiwidXNlcm5hbWUiOiJqb2FvIiwiaWF0IjoxNzU0MDg5ODg1LCJleHAiOjE3NTQwOTM0ODV9.qGiPfnCds26d83IBmDJ35qPb7t-nfrVzxowbBEH9OQg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8000/irrigations"
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta Irrigation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcGktaXJyaWdhY2FvIiwic3ViIjoiMTI5ZDg1YjgtYzI1NC00NGRiLWJkNTAtMjZmNzI4ZjlkM2RjIiwidXNlcm5hbWUiOiJqb2FvIiwiaWF0IjoxNzUzOTk4Njc4LCJleHAiOjE3NTQwMDIyNzh9.WBBf7tINQ4d2J2AQxBKDSUnbvvGO5zTwbvRFOQ8kgHk"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8000/irrigations/839355f3-9920-412a-ad74-e83227f41c0f"
+					},
+					"response": []
+				},
+				{
+					"name": "Busca Irrigation by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcGktaXJyaWdhY2FvIiwic3ViIjoiMTI5ZDg1YjgtYzI1NC00NGRiLWJkNTAtMjZmNzI4ZjlkM2RjIiwidXNlcm5hbWUiOiJqb2FvIiwiaWF0IjoxNzUzOTk4Njc4LCJleHAiOjE3NTQwMDIyNzh9.WBBf7tINQ4d2J2AQxBKDSUnbvvGO5zTwbvRFOQ8kgHk"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8000/irrigations/839355f3-9920-412a-ad74-e83227f41c0f"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
