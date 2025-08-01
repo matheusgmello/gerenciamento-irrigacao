@@ -19,19 +19,21 @@ class AuthServico
 
     public function registrar(string $username, string $senha): array
     {
-        if ($this->repo->buscar_por_username($username)) {
+        $username_normalizado = trim($username);
+        if ($this->repo->buscar_por_username($username_normalizado)) {
             throw new \Exception("Usuário já existe", 400);
         }
 
         $usuario = [
             'id' => Helpers::gerar_uuid(),
-            'username' => $username,
+            'username' => $username_normalizado,
             'senha_hash' => password_hash($senha, PASSWORD_DEFAULT)
         ];
         $this->repo->criar($usuario);
         unset($usuario['senha_hash']);
         return $usuario;
     }
+
 
     public function autenticar(string $username, string $senha): string
     {
