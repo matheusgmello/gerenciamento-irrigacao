@@ -5,7 +5,7 @@ Persistência feita em **arquivos JSON** para simplificar o teste do desafio.
 
 Dentro do projeto, optei por questao de poupar tempo, deixar a chave JWT publica no codigo, ao inves de usar o .env
 
-Projeto possui uma segunda branch onde fiz a persistencia de dados, via SQLite como bonus alem tbm de dockerizar a aplicacao via compose do docker
+Opcional implementado: possui uma segunda branch onde fiz a persistencia de dados, via SQLite, alem tbm de dockerizar a aplicacao via compose do docker
 
 ---
 
